@@ -1,0 +1,20 @@
+apiVersion: certmanager.k8s.io/v1alpha1
+kind: Certificate
+metadata:
+  name: tamanco-net-tls
+spec:
+  secretName: tamanco-net
+  issuerRef:
+    name: letsencrypt-prod
+    kind: ClusterIssuer
+  commonName: tamanco.net
+  dnsNames:
+    - tamanco.net
+    - www.tamanco.net
+  acme:
+    config:
+      - http01:
+          ingressClass: nginx
+        domains:
+          - tamanco.net
+          - www.tamanco.net
